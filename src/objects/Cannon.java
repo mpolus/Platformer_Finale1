@@ -3,11 +3,11 @@ package objects;
 public class Cannon extends GameObject {
 
     public Cannon(int x, int y, int objType) {
-        // TODO: call super passing in x, y, objType
-        // TODO: set tileY to y / Game.TILES_SIZE
-        // TODO: call initHitbox() passing in 40, 26
-        // TODO: subtract (int)(4 * Game.SCALE) from hitbox.x
-        // TODO: add (int)(6 * Game.SCALE) to hitbox.y
+        super(x, y, objType);
+        tileY = y / Game.TILES_SIZE;
+        initHitbox(40, 26);
+        hitbox.x -= (int)(4 * Game.SCALE);
+        hitbox.y += (int)(6 * Game.SCALE);
     }
 
     public void update(){
