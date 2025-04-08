@@ -2,6 +2,7 @@ package utilz;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -56,32 +57,33 @@ public class LoadSave {
         URL url = LoadSave.class.getResource("/lvls");
         File file = null;
 
-        try{
-            newFile(url.toURI()) = file;
+        try {
+            file = new File(url.toURI());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
 
+        File[] files = file.listFiles();
+        File[] filesSorted = new File[files.length];
 
-        // TODO: make a File array named files and assign files.listFiles() to it
-        // TOOD: repeat for filesSorted and assign new File[files.length] to it.
 
-        for (int i = 0; i < filesSorted.length; i++)
+        for (int i = 0; i < filesSorted.length; i++) {
             for (int j = 0; j < files.length; j++) {
-                if (files[j].getName().equals((i + 1) + ".png") then set
-                // TODO: (cont.) filesSorted[i] to files[j]
+                if (files[j].getName().equals((i + 1) + ".png")) {
+                    filesSorted[j] = files[j];
+                }
             }
+        }
 
-        BufferedImage imgs = BufferedImage(filesSorted.length);
-        // TODO: create a BufferedImage array named imgs and initialize to a new BufferedImage passing in the length of filesSorted
+        BufferedImage imgs = new BufferedImage(filesSorted.length);
 
-        for (int i = 0; i < imgs.length; i++)
+        for (int i = 0; i < imgs.length; i++) {
             try {
                 imgs[i] = ImageIO.read(filesSorted[i]);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+        }
         return imgs;
     }
 
