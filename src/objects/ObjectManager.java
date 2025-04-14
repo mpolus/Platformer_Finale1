@@ -172,10 +172,10 @@ public class ObjectManager {
     private void updateCannons(int[][] lvlData, Player player) {
         for (Cannon c : cannons){
             if (!c.doAnimation){
-                if (c.getTileY() == player.getTileY){
+                if (c.getTileY() == player.getTileY()){
                     if (isPlayerInfrontOfCannon(c, player)){
                         if(isPlayerInfrontOfCannon(c, player)){
-                            if(CanCannonSeePlayer(lvlData, player.getHitbox, c.getHitbox, c.getTileY)){
+                            if(CanCannonSeePlayer(lvlData, player.getHitbox(), c.getHitbox, c.getTileY)){
                                 c.setAnimation(true);
                             }
                         }
@@ -263,7 +263,7 @@ public class ObjectManager {
     }
 
     public void resetAllObjects() {
-        loadObjects(playing.getLevelManager().getCurrentLevel);
+        loadObjects(playing.getLevelManager().getCurrentLevel());
 
         for (Potion p : potions)
             p.reset();

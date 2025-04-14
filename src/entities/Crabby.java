@@ -22,8 +22,8 @@ public class Crabby extends Enemy {
     }
 
     private void initAttackBox() {
-        // TODO: assign a new Rectangle2D.Float() with arguments x, y, (int)(82 * Game.SCALE), (int)(19 * Game.SCALE) to attackBox
-        // TODO: assign (int) (Game.SCALE * 30) to attackBoxOffsetX
+        attackBox = new Rectangle2D.Float(x, y, (int)(82 * Game.SCALE), (int)(19 * Game.SCALE));
+        attackBoxOffsetX = (int) (Game.SCALE * 30);
     }
 
     public void update(int[][] lvlData, Player player) {
@@ -34,65 +34,60 @@ public class Crabby extends Enemy {
     }
 
     private void updateAttackBox() {
-        // TODO: assign hitbox.x - attackBoxOffsetX to attackBox.x
-        // TODO: assign hitbox.y to attackBox.y
+        attackBox.x = hitbox.x - attackBoxOffsetX;
+        attackBox.y = hitbox.y;
+
     }
 
     private void updateBehavior(int[][] lvlData, Player player) {
-        // TODO: check if firstUpdate
-        // if block begin
-        // TODO: call firstUpdateCheck() passing in lvlData
-        // end of if block
-        // TODO: check if inAir
-        // if block begin
-        // TODO: call updateInAir() passing in lvlData
-        // end of if block
-        // else block begin
-        switch (state) {
-            case IDLE:
-                newState(RUNNING);
-                break;
-            case RUNNING:
-                if (canSeePlayer(lvlData, player)) {
-                    turnTowardsPlayer(player);
-                    if (isPlayerCloseForAttack(player))
-                        newState(ATTACK);
-                }
-
-                move(lvlData);
-                break;
-            case ATTACK:
-                if (aniIndex == 0)
-                    attackChecked = false;
-                if (aniIndex == 3 && !attackChecked)
-                    checkPlayerHit(attackBox, player);
-                break;
-            case HIT:
-                break;
+        if (firstUpdate){
+            firstUpdateCheck(lvlData);
         }
-        // else block end
+
+        if (inAir){
+            updateInAir(lvlData);
+        }else{
+            switch (state) {
+                case IDLE:
+                    newState(RUNNING);
+                    break;
+                case RUNNING:
+                    if (canSeePlayer(lvlData, player)) {
+                        turnTowardsPlayer(player);
+                        if (isPlayerCloseForAttack(player))
+                            newState(ATTACK);
+                    }
+
+                    move(lvlData);
+                    break;
+                case ATTACK:
+                    if (aniIndex == 0)
+                        attackChecked = false;
+                    if (aniIndex == 3 && !attackChecked)
+                        checkPlayerHit(attackBox, player);
+                    break;
+                case HIT:
+                    break;
+            }
+        }
     }
 
     public int flipX() {
-        // TODO: check if walkDir is equal to RIGHT
-        // if block begin
-        // TODO: return width;
-        // end of if block
-        // else block begin
-        // TODO: return 0
-        // else block end
-        return 0; // TODO: temp value, remove when done.
+        if (walkDir == RIGHT){
+            return width;
+
+        }else{
+            return 0;
+        }
 
     }
 
     public int flipW() {
-        // TODO: check if walkDir is equal to RIGHT
-        // if block begin
-        // TODO: return -1;
-        // end of if block
-        // else block begin
-        // TODO: return 1
-        // else block end
-        return 0; // TODO: temp value, remove when done.
+        if (walkDir == RIGHT){
+            return -1;
+        }else{
+            return 1;
+        }
+
     }
 }
