@@ -11,11 +11,12 @@ public class Cannon extends GameObject {
     }
 
     public void update(){
-        // TODO: check if doAnimation is true and if so updateAnimationTick()
+        if (doAnimation == true){
+            updateAnimationTick();
+        }
     }
 
     public int getTileY() {
         return tileY;
-        // TODO: return tileY
     }
 }

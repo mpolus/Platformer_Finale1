@@ -2,6 +2,8 @@ package objects;
 
 import java.awt.geom.Rectangle2D;
 
+import static utilz.Constants.Projectiles.SPEED;
+
 public class Projectile extends GameObject {
     private Rectangle2D.Float hitbox;
     private int dir;
@@ -9,35 +11,37 @@ public class Projectile extends GameObject {
 
 
     public Projectile(int x, int y, int dir) {
-        xOffset = (int) (-3 * Game.SCALE);
-        yOffset = (int) (5 * Game.SCALE);
+        int xOffset = (int) (-3 * Game.SCALE);
+        int yOffset = (int) (5 * Game.SCALE);
 
         if(dir == 0){
             xOffset = (int)  (29 * Game.SCALE);
         }
 
-        // TODO: set hitbox to new Rectangle2D.Float() passing in
-        // x + xOffset, y + yOffset, CANNON_BALL_WIDTH, CANNON_BALL_HEIGHT
-        // TODO: set this.dir to dir
+        hitbox = new Rectangle2D.Float(x + xOffset, y + yOffset, CANNON_BALL_WIDTH, CANNON_BALL_HEIGHT);
+        this.dir = dir;
+
     }
 
     public void updatePos(){
-        // TODO: add dir * SPEED to hitbox.x
+        hitbox.x += dir * SPEED;
     }
 
     public void setPos(int x, int y){
-        // TODO: do what this setter method should do
+        hitbox.x = x;
+        hitbox.y = y;
+
     }
 
     public Rectangle2D.Float getHitbox() {
-        // TODO: return the hitbox
+        return hitbox;
     }
 
     public void setActive(boolean active){
-        // TODO: do what you think this should do
+        this.active = active;
     }
 
     public boolean isActive(){
-        // TODO: isActive
+        return active;
     }
 }
