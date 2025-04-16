@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import gamestates.Gamestate;
 import gamestates.Playing;
 import main.Game;
+import utilz.Constants;
 import utilz.LoadSave;
 import static utilz.Constants.UI.PauseButtons.*;
 import static utilz.Constants.UI.URMButtons.*;
@@ -30,10 +31,10 @@ public class PauseOverlay {
     }
 
     private void createUrmButtons() {
-        int menuX = (int) (313 * Game.SCALE);
-        int replayX = (int) (387 * Game.SCALE);
-        int unpauseX = (int) (462 * Game.SCALE);
-        int bY = (int) (325 * Game.SCALE);
+        int menuX = (int) (313 * Constants.Game.SCALE);
+        int replayX = (int) (387 * Constants.Game.SCALE);
+        int unpauseX = (int) (462 * Constants.Game.SCALE);
+        int bY = (int) (325 * Constants.Game.SCALE);
 
         menuB = new UrmButton(menuX, bY, URM_SIZE, URM_SIZE, 2);
         replayB = new UrmButton(replayX, bY, URM_SIZE, URM_SIZE, 1);
@@ -42,10 +43,10 @@ public class PauseOverlay {
 
     private void loadBackground() {
         backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.PAUSE_BACKGROUND);
-        bgW = (int) (backgroundImg.getWidth() * Game.SCALE);
-        bgH = (int) (backgroundImg.getHeight() * Game.SCALE);
-        bgX = Game.GAME_WIDTH / 2 - bgW / 2;
-        bgY = (int) (25 * Game.SCALE);
+        bgW = (int) (backgroundImg.getWidth() * Constants.Game.SCALE);
+        bgH = (int) (backgroundImg.getHeight() * Constants.Game.SCALE);
+        bgX = Constants.Game.GAME_WIDTH / 2 - bgW / 2;
+        bgY = (int) (25 * Constants.Game.SCALE);
     }
 
     public void update() {

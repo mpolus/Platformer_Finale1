@@ -13,7 +13,7 @@ public class Cannon extends GameObject {
     }
 
     public void update(){
-        if (doAnimation == true){
+        if (doAnimation = true){
             updateAnimationTick();
         }
     }

@@ -31,8 +31,8 @@ public class GameOptions extends State implements Statemethods {
     }
 
     private void loadButton() {
-        int menuX = (int)(387 * Game.SCALE);
-        int menuY = (int)(325 * Game.SCALE);
+        int menuX = (int)(387 * Constants.Game.SCALE);
+        int menuY = (int)(325 * Constants.Game.SCALE);
 
         menuB = new UrmButton(menuX, menuY, URM_SIZE, URM_SIZE, 2);
     }
@@ -41,10 +41,10 @@ public class GameOptions extends State implements Statemethods {
         backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND_IMG);
         optionsBackgroundImg = LoadSave.GetSpriteAtlas(LoadSave.OPTIONS_MENU);
 
-        bgW = (int) (optionsBackgroundImg.getWidth() * Game.SCALE);
-        bgH = (int) (optionsBackgroundImg.getHeight() * Game.SCALE);
-        bgX = Game.GAME_WIDTH / 2 - bgW / 2;
-        bgY = (int) (33 * Game.SCALE);
+        bgW = (int) (optionsBackgroundImg.getWidth() * Constants.Game.SCALE);
+        bgH = (int) (optionsBackgroundImg.getHeight() * Constants.Game.SCALE);
+        bgX = Constants.Game.GAME_WIDTH / 2 - bgW / 2;
+        bgY = (int) (33 * Constants.Game.SCALE);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class GameOptions extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(backgroundImg, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+        g.drawImage(backgroundImg, 0, 0, Constants.Game.GAME_WIDTH, Constants.Game.GAME_HEIGHT, null);
         g.drawImage(optionsBackgroundImg, bgX, bgY, bgW, bgH, null);
 
        menuB.draw(g);
