@@ -80,7 +80,7 @@ public class GameOptions extends State implements Statemethods {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (IsIn(e, menuB)){
+        if (isIn(e, menuB)){
             Gamestate.state = Gamestate.MENU;
         }else{
             audioOptions.mouseReleased(e);
