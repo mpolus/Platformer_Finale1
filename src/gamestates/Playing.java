@@ -8,10 +8,10 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-import main.Game;
 import entities.EnemyManager;
 import entities.Player;
 import levels.LevelManager;
+import main.Game;
 import objects.ObjectManager;
 import ui.GameOverOverlay;
 import ui.LevelCompletedOverlay;
@@ -43,7 +43,6 @@ public class Playing extends State implements Statemethods {
     private boolean lvlCompleted;
     private boolean playerDying;
 
-    // TODO: hey look free code.
     public Playing(Game game) {
         super(game);
         initClasses();
@@ -80,7 +79,7 @@ public class Playing extends State implements Statemethods {
         enemyManager = new EnemyManager(this);
         objectManager = new ObjectManager(this);
 
-        player = new Player(200, 200, (int) (64 * Constants.Game.SCALE), (int) (40 * Game.SCALE), this);
+        player = new Player(200, 200, (int) (64 * Constants.Game.SCALE), (int) (40 * Constants.Game.SCALE), this);
         player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
         player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn());
 

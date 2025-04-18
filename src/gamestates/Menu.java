@@ -1,13 +1,14 @@
 package gamestates;
 
-import main.Game;
-import ui.MenuButton;
-import utilz.LoadSave;
-
-import java.awt.*;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+
+import main.Game;
+import ui.MenuButton;
+import utilz.Constants;
+import utilz.LoadSave;
 
 public class Menu extends State implements Statemethods {
 
@@ -20,101 +21,98 @@ public class Menu extends State implements Statemethods {
         loadButtons();
         loadBackground();
         backgroundImgPink = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND_IMG);
+
     }
 
     private void loadBackground() {
         backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND);
-        menuWidth = (int) (backgroundImg.getWidth() * Game.SCALE);
-        menuHeight = (int)(backgroundImg.getHeight() * Game.SCALE);
-        menuX = Game.GAME_WIDTH / 2 - menuWidth / 2;
-        menuY = (int) (45 * Game.SCALE);
+        menuWidth = (int) (backgroundImg.getWidth() * Constants.Game.SCALE);
+        menuHeight = (int) (backgroundImg.getHeight() * Constants.Game.SCALE);
+        menuX = Constants.Game.GAME_WIDTH / 2 - menuWidth / 2;
+        menuY = (int) (45 * Constants.Game.SCALE);
     }
 
     private void loadButtons() {
-        buttons[0 ]= MenuButton(Game.GAME_WIDTH / 2, (int) (150 * Game.SCALE), 0, GameState.PLAYING);
-        buttons[1] = MenuButton(Game.GAME_WIDTH / 2, (int) (220 * Game.SCALE), 1, Gamestate.OPTIONS);
-       buttons[2] = MenuButton(Game.GAME_WIDTH / 2, (int) (290 * Game.SCALE), 2, Gamestate.QUIT);
+        buttons[0] = new MenuButton(Constants.Game.GAME_WIDTH / 2, (int) (150 * Constants.Game.SCALE), 0, Gamestate.PLAYING);
+        buttons[1] = new MenuButton(Constants.Game.GAME_WIDTH / 2, (int) (220 * Constants.Game.SCALE), 1, Gamestate.OPTIONS);
+        buttons[2] = new MenuButton(Constants.Game.GAME_WIDTH / 2, (int) (290 * Constants.Game.SCALE), 2, Gamestate.QUIT);
     }
 
     @Override
     public void update() {
-        for (MenuButton button : buttons) {
+        for (MenuButton mb : buttons)
             mb.update();
-        }
-
     }
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(backgroundImgPin, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
-        g.drawImage(backgroundImg, menuX, menuY, menuWidth, menuHeight, null);
-        for (MenuButton button : buttons) {
-            mb.draw(g);
-        }
 
+        g.drawImage(backgroundImgPink, 0, 0, Constants.Game.GAME_WIDTH, Constants.Game.GAME_HEIGHT, null);
+        g.drawImage(backgroundImg, menuX, menuY, menuWidth, menuHeight, null);
+
+        for (MenuButton mb : buttons)
+            mb.draw(g);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        for (MenuButton button : buttons) {
-            if (isIn(e, mb)){
+        for (MenuButton mb : buttons) {
+            if (isIn(e, mb)) {
                 mb.setMousePressed(true);
             }
         }
-
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        for (MenuButton button : buttons) {
-            if (isIn(e, mb)){
-                if (mb.isMousePressed()){
-                    mb.applyGameState();
-                    if (mb.getState() == Gamestate.PLAYING){
-                        game.getAudioPlayer().setLevelSong(game.getPlaying().getLevelManager.getLevelIndex());
-                    }
-                    break;
-                }
+        for (MenuButton mb : buttons) {
+            if (isIn(e, mb)) {
+                if (mb.isMousePressed())
+                    mb.applyGamestate();
+                if (mb.getState() == Gamestate.PLAYING)
+                    game.getAudioPlayer().setLevelSong(game.getPlaying().getLevelManager().getLevelIndex());
+                break;
             }
-            resetButtons();
         }
+
+        resetButtons();
 
     }
 
     private void resetButtons() {
-        for (MenuButton button : buttons) {
+        for (MenuButton mb : buttons)
             mb.resetBools();
-        }
-
 
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        for (MenuButton button : buttons) {
+        for (MenuButton mb : buttons)
             mb.setMouseOver(false);
-        }
 
-        for (MenuButton button : buttons) {
-            if (isIn(e, mb)){
-                mb.MouseOver(true);
+        for (MenuButton mb : buttons)
+            if (isIn(e, mb)) {
+                mb.setMouseOver(true);
                 break;
-
             }
-        }
 
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        // TODO Auto-generated method stub
+
     }
 
 }
